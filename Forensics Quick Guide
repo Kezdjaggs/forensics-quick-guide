@@ -1,0 +1,51 @@
+ 📋 Investigation Steps
+
+ 1. Preparation
+- Document everything
+- Use write-blockers
+- Capture hashes before analysis
+
+ 2. Collection
+- Disk imaging (`dd`, `FTK Imager`)
+- Memory acquisition (`DumpIt`, `LiME`)
+- Network logs
+- System logs
+
+ 3. Analysis
+- File analysis
+- Registry analysis
+- Memory analysis
+- Timeline creation
+
+ 4. Reporting
+- Summary of findings
+- Timeline of events
+- Chain of custody
+- Recommendations
+
+---
+
+ 🛠️ Essential Commands
+ Disk Imaging (Linux)
+```bash
+dd if=/dev/sda of=image.dd bs=4096 conv=noerror,sync
+dcfldd if=/dev/sda of=image.dd hash=md5 hashlog=hash.txt
+File Analysis
+file suspicious_file
+strings suspicious_file | less
+binwalk suspicious_file
+xxd suspicious_file | head
+
+Memory Analysis (Volatility)
+volatility -f memory.dmp imageinfo
+volatility -f memory.dmp --profile=Win10x64 pslist
+volatility -f memory.dmp --profile=Win10x64 netscan
+
+Timeline Creation
+log2timeline --hasher md5 timeline.plaso /mnt/evidence/
+psort -o l2tcsv timeline.plaso > timeline.csv
+
+🔗 Connect
+GitHub: github.com/Kezdjaggs
+
+LinkedIn: linkedin.com/in/kehinde-jagunna-7b063a319
